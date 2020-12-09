@@ -1,6 +1,8 @@
 <?php
 
 /* @var $this yii\web\View */
+/* @var object $resumes */
+/* @var integer $queryCount */
 
 ?>
 
@@ -13,7 +15,7 @@
         <div class="row">
             <div class="col-lg-9 desctop-992-pr-16">
                 <div class="d-flex align-items-center flex-wrap mb8">
-                    <span class="paragraph mr16">Найдено 3 резюме</span>
+                    <span class="paragraph mr16">Найдено <?= $queryCount ?> резюме</span>
                     <div class="vakancy-page-header-dropdowns">
                         <div class="vakancy-page-wrap show mr16">
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -37,164 +39,67 @@
                         </div>
                     </div>
                 </div>
-                <div class="vakancy-page-block company-list-search__block resume-list__block p-rel mb16">
-                    <div class="company-list-search__block-left">
-                        <div class="resume-list__block-img mb8">
-                            <img src="images/profile-foto.jpg" alt="profile">
+                <?php
+
+                if (empty($resumes)): ?>
+
+                    <h3 class="mini-title mobile-off">Резюме не найдено</h3>
+
+                <?php else: ?>
+
+                <?php
+                foreach ($resumes
+
+                as $item): ?>
+                    <div class="vakancy-page-block company-list-search__block resume-list__block p-rel mb16">
+                        <div class="company-list-search__block-left">
+                            <div class="resume-list__block-img mb8">
+                                <a href="<?= \yii\helpers\Url::to(['resume/view', 'id' => $item->id]) ?>">
+                                    <img src="images/profile-foto.jpg" alt="profile">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="company-list-search__block-right">
+                            <div class="mini-paragraph cadet-blue mobile-mb12">Обновлено <?= date(
+                                    'd-m-Y в H:m:s',
+                                    strtotime(
+                                        $item->updated_at
+                                    )
+                                ) ?></div>
+                            <h3 class="mini-title mobile-off"><?= /** @var array $positions */
+                                array_search($item->position, $positions) ?></h3>
+                            <div class="d-flex align-items-center flex-wrap mb8 ">
+                                <span class="mr16 paragraph"><?= $item->salary ?></span>
+                                <span class="mr16 paragraph"><?= ($item->experience) ? $item->experience : "Нет опыта" ?></span>
+                                <span class="mr16 paragraph"><?= floor(
+                                        (time() - strtotime($item->birthday)) / (60 * 60 * 24 * 365.25)
+                                    ); ?> лет</span>
+                                <span class="mr16 paragraph"><?= $item->city ?></span>
+                            </div>
+                            <p class="paragraph tbold mobile-off"><?= ($item->experience) ? 'Последнее место работы ' . $item->experience : "" ?></p>
+                        </div>
+                        <div class="company-list-search__block-middle">
+                            <h3 class="mini-title desktop-off">PHP разработчик</h3>
+                            <p class="paragraph mb16 mobile-mb32">
+                                <?= ($item->note) ? substr($item->note, 0, 220)
+                                    : "Информация не указана" ?>
+                            </p>
                         </div>
                     </div>
-                    <div class="company-list-search__block-right">
-                        <div class="mini-paragraph cadet-blue mobile-mb12">Обновлено 1 апреля 2020 в 15:00</div>
-                        <h3 class="mini-title mobile-off">PHP разработчик</h3>
-                        <div class="d-flex align-items-center flex-wrap mb8 ">
-                            <span class="mr16 paragraph">120 000 ₽</span>
-                            <span class="mr16 paragraph">Опыт работы 3 года</span>
-                            <span class="mr16 paragraph">43 года</span>
-                            <span class="mr16 paragraph">Кемерово</span>
-                        </div>
-                        <p class="paragraph tbold mobile-off">Последнее место работы</p>
-                    </div>
-                    <div class="company-list-search__block-middle">
-                        <h3 class="mini-title desktop-off">PHP разработчик</h3>
-                        <p class="paragraph mb16 mobile-mb32">Младший PHP разработчик в ООО «ТЕПЛОВОЕ
-                            ОБОРУДОВАНИЕ»,
-                            Октябрь 2010 — по настоящее время </p>
-                    </div>
-                </div>
-                <div class="vakancy-page-block company-list-search__block resume-list__block p-rel mb16">
-                    <div class="company-list-search__block-left">
-                        <div class="resume-list__block-img mb8">
-                            <img src="images/profile-foto.jpg" alt="profile">
-                        </div>
-                    </div>
-                    <div class="company-list-search__block-right">
-                        <div class="mini-paragraph cadet-blue mobile-mb12">Обновлено 1 апреля 2020 в 15:00</div>
-                        <h3 class="mini-title mobile-off">PHP разработчик</h3>
-                        <div class="d-flex align-items-center flex-wrap mb8 ">
-                            <span class="mr16 paragraph">120 000 ₽</span>
-                            <span class="mr16 paragraph">Опыт работы 3 года</span>
-                            <span class="mr16 paragraph">43 года</span>
-                            <span class="mr16 paragraph">Кемерово</span>
-                        </div>
-                        <p class="paragraph tbold mobile-off">Последнее место работы</p>
-                    </div>
-                    <div class="company-list-search__block-middle">
-                        <h3 class="mini-title desktop-off">PHP разработчик</h3>
-                        <p class="paragraph mb16 mobile-mb32">Младший PHP разработчик в ООО «ТЕПЛОВОЕ
-                            ОБОРУДОВАНИЕ»,
-                            Октябрь 2010 — по настоящее время </p>
-                    </div>
-                </div>
-                <div class="vakancy-page-block company-list-search__block resume-list__block p-rel mb16">
-                    <div class="company-list-search__block-left">
-                        <div class="resume-list__block-img mb8">
-                            <img src="images/profile-foto.jpg" alt="profile">
-                        </div>
-                    </div>
-                    <div class="company-list-search__block-right">
-                        <div class="mini-paragraph cadet-blue mobile-mb12">Обновлено 1 апреля 2020 в 15:00</div>
-                        <h3 class="mini-title mobile-off">PHP разработчик</h3>
-                        <div class="d-flex align-items-center flex-wrap mb8 ">
-                            <span class="mr16 paragraph">120 000 ₽</span>
-                            <span class="mr16 paragraph">Опыт работы 3 года</span>
-                            <span class="mr16 paragraph">43 года</span>
-                            <span class="mr16 paragraph">Кемерово</span>
-                        </div>
-                        <p class="paragraph tbold mobile-off">Последнее место работы</p>
-                    </div>
-                    <div class="company-list-search__block-middle">
-                        <h3 class="mini-title desktop-off">PHP разработчик</h3>
-                        <p class="paragraph mb16 mobile-mb32">Младший PHP разработчик в ООО «ТЕПЛОВОЕ
-                            ОБОРУДОВАНИЕ»,
-                            Октябрь 2010 — по настоящее время </p>
-                    </div>
-                </div>
-                <div class="vakancy-page-block company-list-search__block resume-list__block p-rel mb16">
-                    <div class="company-list-search__block-left">
-                        <div class="resume-list__block-img mb8">
-                            <img src="images/profile-foto.jpg" alt="profile">
-                        </div>
-                    </div>
-                    <div class="company-list-search__block-right">
-                        <div class="mini-paragraph cadet-blue mobile-mb12">Обновлено 1 апреля 2020 в 15:00</div>
-                        <h3 class="mini-title mobile-off">PHP разработчик</h3>
-                        <div class="d-flex align-items-center flex-wrap mb8 ">
-                            <span class="mr16 paragraph">120 000 ₽</span>
-                            <span class="mr16 paragraph">Опыт работы 3 года</span>
-                            <span class="mr16 paragraph">43 года</span>
-                            <span class="mr16 paragraph">Кемерово</span>
-                        </div>
-                        <p class="paragraph tbold mobile-off">Последнее место работы</p>
-                    </div>
-                    <div class="company-list-search__block-middle">
-                        <h3 class="mini-title desktop-off">PHP разработчик</h3>
-                        <p class="paragraph mb16 mobile-mb32">Младший PHP разработчик в ООО «ТЕПЛОВОЕ
-                            ОБОРУДОВАНИЕ»,
-                            Октябрь 2010 — по настоящее время </p>
-                    </div>
-                </div>
-                <div class="vakancy-page-block company-list-search__block resume-list__block p-rel mb16">
-                    <div class="company-list-search__block-left">
-                        <div class="resume-list__block-img mb8">
-                            <img src="images/profile-foto.jpg" alt="profile">
-                        </div>
-                    </div>
-                    <div class="company-list-search__block-right">
-                        <div class="mini-paragraph cadet-blue mobile-mb12">Обновлено 1 апреля 2020 в 15:00</div>
-                        <h3 class="mini-title mobile-off">PHP разработчик</h3>
-                        <div class="d-flex align-items-center flex-wrap mb8 ">
-                            <span class="mr16 paragraph">120 000 ₽</span>
-                            <span class="mr16 paragraph">Опыт работы 3 года</span>
-                            <span class="mr16 paragraph">43 года</span>
-                            <span class="mr16 paragraph">Кемерово</span>
-                        </div>
-                        <p class="paragraph tbold mobile-off">Последнее место работы</p>
-                    </div>
-                    <div class="company-list-search__block-middle">
-                        <h3 class="mini-title desktop-off">PHP разработчик</h3>
-                        <p class="paragraph mb16 mobile-mb32">Младший PHP разработчик в ООО «ТЕПЛОВОЕ
-                            ОБОРУДОВАНИЕ»,
-                            Октябрь 2010 — по настоящее время </p>
-                    </div>
-                </div>
-                <div class="vakancy-page-block company-list-search__block resume-list__block p-rel mb16">
-                    <div class="company-list-search__block-left">
-                        <div class="resume-list__block-img mb8">
-                            <img src="images/profile-foto.jpg" alt="profile">
-                        </div>
-                    </div>
-                    <div class="company-list-search__block-right">
-                        <div class="mini-paragraph cadet-blue mobile-mb12">Обновлено 1 апреля 2020 в 15:00</div>
-                        <h3 class="mini-title mobile-off">PHP разработчик</h3>
-                        <div class="d-flex align-items-center flex-wrap mb8 ">
-                            <span class="mr16 paragraph">120 000 ₽</span>
-                            <span class="mr16 paragraph">Опыт работы 3 года</span>
-                            <span class="mr16 paragraph">43 года</span>
-                            <span class="mr16 paragraph">Кемерово</span>
-                        </div>
-                        <p class="paragraph tbold mobile-off">Последнее место работы</p>
-                    </div>
-                    <div class="company-list-search__block-middle">
-                        <h3 class="mini-title desktop-off">PHP разработчик</h3>
-                        <p class="paragraph mb16 mobile-mb32">Младший PHP разработчик в ООО «ТЕПЛОВОЕ
-                            ОБОРУДОВАНИЕ»,
-                            Октябрь 2010 — по настоящее время </p>
-                    </div>
-                </div>
-                <ul class="dor-pagination mb128">
-                    <li class="page-link-prev"><a href="#"><img class="mr8"
-                                                                src="images/mini-left-arrow.svg" alt="arrow"> Назад</a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a class="grey" href="#">...</a></li>
-                    <li class="active"><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a class="grey" href="#">...</a></li>
-                    <li><a href="#">10</a></li>
-                    <li class="page-link-next"><a href="#">Далее <img class="ml8"
-                                                                      src="images/mini-right-arrow.svg" alt="arrow"></a>
-                    </li>
-                </ul>
+                    <?php
+                    endforeach;
+                    endif;
+                    ?>
+                    <ul class="dor-pagination mb128">
+
+                        <?= /** @var object $pages */
+                        \yii\widgets\LinkPager::widget(
+                            [
+                                'pagination' => $pages,
+                            ]
+                        ) ?>
+
+                    </ul>
             </div>
             <?= $this->render('//layouts/inc/search-form'); ?>
         </div>

@@ -172,38 +172,17 @@
                     </div>
                     <div class="col-lg-3 col-md-4 col-11">
                         <div class="profile-info">
-                            <div class="form-check d-flex">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1"
-                                       name="Resume[employment]" value="Полная занятость">
-                                <label class="form-check-label" for="exampleCheck1"></label>
-                                <label for="exampleCheck1" class="profile-info__check-text job-resolution-checkbox">Полная
-                                    занятость</label>
-                            </div>
-                            <div class="form-check d-flex">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck2"
-                                       name="Resume[employment]" value="Частичная занятость">
-                                <label class="form-check-label" for="exampleCheck2"></label>
-                                <label for="exampleCheck2" class="profile-info__check-text job-resolution-checkbox">Частичная
-                                    занятость</label>
-                            </div>
-                            <div class="form-check d-flex">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck3"
-                                       name="Resume[employment]" value="Проектная/Временная
-                                    работа">
-                                <label class="form-check-label" for="exampleCheck3"></label>
-                                <label for="exampleCheck3" class="profile-info__check-text job-resolution-checkbox">Проектная/Временная
-                                    работа</label>
-                            </div>
-                            <div class="form-check d-flex">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck4" name="Resume[employment]" value="Волонтёрство">
-                                <label class="form-check-label" for="exampleCheck4"></label>
-                                <label for="exampleCheck4" class="profile-info__check-text job-resolution-checkbox">Волонтёрство</label>
-                            </div>
-                            <div class="form-check d-flex">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck5" name="Resume[employment]" value="Стажировка">
-                                <label class="form-check-label" for="exampleCheck5"></label>
-                                <label for="exampleCheck5" class="profile-info__check-text job-resolution-checkbox">Стажировка</label>
-                            </div>
+                            <?php $i = 1;
+                            /** @var array $employmentCheck */
+                            foreach ($employmentCheck as $checkbox): ?>
+                                <div class="form-check d-flex">
+                                    <input type="checkbox" class="form-check-input" id="employment<?= $i; ?>"
+                                           name="Resume[employment][]" value="<?= $checkbox; ?>">
+                                    <label class="form-check-label" for="employment<?= $i; ?>"></label>
+                                    <label for="employment<?= $i; ?>"
+                                           class="profile-info__check-text job-resolution-checkbox"><?= $checkbox ?></label>
+                                </div>
+                                <?php $i++; endforeach; ?>
                         </div>
                     </div>
                 </div>
@@ -213,37 +192,20 @@
                     </div>
                     <div class="col-lg-3 col-md-4 col-11">
                         <div class="profile-info">
-                            <div class="form-check d-flex">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck6">
-                                <label class="form-check-label" for="exampleCheck6"></label>
-                                <label for="exampleCheck6" class="profile-info__check-text job-resolution-checkbox">Полный
-                                    день</label>
-                            </div>
-                            <div class="form-check d-flex">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck7">
-                                <label class="form-check-label" for="exampleCheck7"></label>
-                                <label for="exampleCheck7" class="profile-info__check-text job-resolution-checkbox">Сменный
-                                    график</label>
-                            </div>
-                            <div class="form-check d-flex">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck8">
-                                <label class="form-check-label" for="exampleCheck8"></label>
-                                <label for="exampleCheck8" class="profile-info__check-text job-resolution-checkbox">Гибкий
-                                    график</label>
-                            </div>
-                            <div class="form-check d-flex">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck9">
-                                <label class="form-check-label" for="exampleCheck9"></label>
-                                <label for="exampleCheck9" class="profile-info__check-text job-resolution-checkbox">Удалённая
-                                    работа</label>
-                            </div>
-                            <div class="form-check d-flex">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck10">
-                                <label class="form-check-label" for="exampleCheck10"></label>
-                                <label for="exampleCheck10"
-                                       class="profile-info__check-text job-resolution-checkbox">Вахтовый
-                                    метод</label>
-                            </div>
+                            <?php $i = 1;
+                            /** @var array $scheduleCheck */
+                            foreach ($scheduleCheck as $checkbox): ?>
+                                <div class="form-check d-flex">
+                                    <input type="checkbox" class="form-check-input" name="Resume[schedule][]"
+                                           id="schedule<?= $i; ?>"
+                                           value="<?= $checkbox; ?>">
+                                    <label class="form-check-label" for="schedule<?= $i; ?>"></label>
+                                    <label for="schedule<?= $i; ?>"
+                                           class="profile-info__check-text job-resolution-checkbox"><?= $checkbox ?></label>
+                                </div>
+                                <?php
+                                $i++;
+                            endforeach; ?>
                         </div>
                     </div>
                 </div>
@@ -373,7 +335,9 @@
                         <div class="paragraph">О себе</div>
                     </div>
                     <div class="col-lg-5 col-md-7 col-12">
-                        <textarea class="dor-input w100 h176 mb8"></textarea>
+                        <?= $form->field($resume, 'note')->textarea(['class' => 'dor-input w100 h176 mb8'])->label(
+                            false
+                        ); ?>
                     </div>
                 </div>
                 <div class="row mb128 mobile-mb64">

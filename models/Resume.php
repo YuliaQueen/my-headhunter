@@ -10,6 +10,7 @@ use yii\db\Expression;
  * This is the model class for table "resume".
  *
  * @property int $id
+ * @property int $user_id
  * @property string $first_name
  * @property string $middle_name
  * @property string $last_name
@@ -60,18 +61,28 @@ class Resume extends \yii\db\ActiveRecord
     {
         return [
             [
-                ['first_name', 'middle_name', 'last_name', 'birthday', 'city', 'email', 'phone', 'position', 'salary'],
+                [
+                    'user_id',
+                    'first_name',
+                    'middle_name',
+                    'last_name',
+                    'birthday',
+                    'city',
+                    'email',
+                    'phone',
+                    'position',
+                    'salary'
+                ],
                 'required'
             ],
-            [['birthday', 'created_at', 'updated_at'], 'safe'],
-            [['experience'], 'integer'],
+            [['birthday', 'created_at', 'updated_at', 'employment', 'schedule'], 'safe'],
+            [['user_id', 'experience'], 'integer'],
             [['jobs', 'note'], 'string'],
             [['first_name', 'middle_name', 'last_name'], 'string', 'max' => 100],
             [['gender'], 'string', 'max' => 4],
             [['city', 'email'], 'string', 'max' => 250],
             [['phone'], 'string', 'max' => 12],
             [['position', 'salary'], 'string', 'max' => 20],
-            [['employment', 'schedule'], 'string', 'max' => 250],
         ];
     }
 
@@ -102,9 +113,9 @@ class Resume extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getSelectItems()
+    public static function getSelectItems()
     {
-        $items = [
+        return [
 
             '1' => 'Администратор баз данных',
             '2' => 'Аналитик',
@@ -133,14 +144,32 @@ class Resume extends \yii\db\ActiveRecord
             '25' => 'Web инженер',
             '26' => 'Web мастер',
         ];
-
-        return $items;
     }
 
-    public function getSelectParams()
+    public static function getScheduleCheckboxItems()
     {
-        $params = ['prompt' => 'Выберите профессию...', 'class' => 'nselect-1'];
-        return $params;
+        return [
+            '0' => 'Полный день',
+            '1' => 'Сменный график',
+            '2' => 'Гибкий график',
+            '3' => 'Удаленная работа',
+        ];
+    }
+
+    public static function getEmploymentCheckboxItems()
+    {
+        return [
+            '0' => 'Полная занятость',
+            '1' => 'Частичная занятость',
+            '2' => 'Проектная/Временная работа',
+            '3' => 'Волонтёрство',
+            '4' => 'Стажировка'
+        ];
+    }
+
+    public static function getSelectParams()
+    {
+        return ['prompt' => 'Выберите профессию...', 'class' => 'nselect-1'];
     }
 
     /**
@@ -149,10 +178,13 @@ class Resume extends \yii\db\ActiveRecord
      */
     public function beforeSave($insert)
     {
-        $time = strtotime($this->birthday);
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
 
-        $this->birthday = date('Y-m-d', $time);
+        $this->birthday = date('Y-m-d', strtotime($this->birthday));
 
-        return parent::beforeSave($insert);
+        return true;
     }
+
 }
