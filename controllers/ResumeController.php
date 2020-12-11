@@ -16,19 +16,14 @@ class ResumeController extends Controller
     public function actionView($id)
     {
         $resume = Resume::findOne($id);
-
+//var_dump($resume); die();
 
         if (!empty($resume->schedule)) {
             $resume->schedule = implode(', ', unserialize($resume->schedule));
-        } else {
-            $resume->schedule = null;
         }
 
         if (!empty($resume->employment)){
             $resume->employment = implode(', ', unserialize($resume->employment));
-        }
-        else {
-            $resume->employment = null;
         }
 
 
@@ -65,11 +60,11 @@ class ResumeController extends Controller
         if ($resume->load(Yii::$app->request->post())) {
             if (is_array($resume->employment)) {
                 $resume->employment = serialize($resume->employment);
-            } else $resume->employment = '';
+            } else $resume->employment = null;
 
             if (is_array($resume->schedule)) {
                 $resume->schedule = serialize($resume->schedule);
-            } else $resume->schedule = '';
+            } else $resume->schedule = null;
 
             if ($resume->save()) {
                 Yii::$app->session->setFlash('success', 'Резюме успешно сохранено');
