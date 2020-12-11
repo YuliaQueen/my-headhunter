@@ -16,7 +16,6 @@ class ResumeController extends Controller
     public function actionView($id)
     {
         $resume = Resume::findOne($id);
-//var_dump($resume); die();
 
         if (!empty($resume->schedule)) {
             $resume->schedule = implode(', ', unserialize($resume->schedule));
