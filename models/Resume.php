@@ -20,7 +20,7 @@ use yii\db\Expression;
  * @property string $city
  * @property string $email
  * @property string $phone
- * @property string $position
+ * @property int $position
  * @property string $salary
  * @property string $employment
  * @property string $schedule
@@ -56,6 +56,11 @@ class Resume extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getPosition0()
+    {
+        return $this->hasOne(Position::className(), ['id' => 'position']);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -78,13 +83,13 @@ class Resume extends \yii\db\ActiveRecord
                 'required'
             ],
             [['birthday', 'created_at', 'updated_at', 'employment', 'schedule'], 'safe'],
-            [['user_id', 'experience', 'view_count'], 'integer'],
+            [['user_id', 'position', 'experience', 'view_count'], 'integer'],
             [['jobs', 'note'], 'string'],
             [['first_name', 'middle_name', 'last_name'], 'string', 'max' => 100],
             [['gender'], 'string', 'max' => 4],
             [['city', 'email', 'img_path'], 'string', 'max' => 250],
             [['phone'], 'string', 'max' => 12],
-            [['position', 'salary'], 'string', 'max' => 100],
+            [['salary'], 'string', 'max' => 100],
         ];
     }
 
@@ -112,39 +117,6 @@ class Resume extends \yii\db\ActiveRecord
             'note' => 'О себе',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
-        ];
-    }
-
-    public static function getSelectItems()
-    {
-        return [
-
-            '1' => 'Администратор баз данных',
-            '2' => 'Аналитик',
-            '3' => 'Арт-директор',
-            '4' => 'Инженер',
-            '5' => 'Компьютерная безопасность',
-            '6' => 'Контент',
-            '7' => 'Маркетинг',
-            '8' => 'Мультимедиа',
-            '9' => 'Оптимизация сайта (SEO)',
-            '10' => 'Передача данных и доступ в интернет',
-            '11' => 'Программирование, Разработка',
-            '12' => 'Продажи',
-            '13' => 'Продюсер',
-            '14' => 'Развитие бизнеса',
-            '15' => 'Системный администратор',
-            '16' => 'Системы управления предприятием (ERP)',
-            '17' => 'Сотовые, Беспроводные технологии',
-            '18' => 'Стартапы',
-            '19' => 'Телекоммуникации',
-            '20' => 'Тестирование',
-            '21' => 'Технический писатель',
-            '22' => 'Управление проектами',
-            '23' => 'Электронная коммерция',
-            '24' => 'CRM системы',
-            '25' => 'Web инженер',
-            '26' => 'Web мастер',
         ];
     }
 

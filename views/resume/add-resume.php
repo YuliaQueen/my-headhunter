@@ -147,8 +147,9 @@
                         <div class="citizenship-select">
                             <?= /** @var array $items */
                             /** @var array $params */
+                            /** @var object $resume */
                             $form->field($resume, 'position')
-                                ->dropDownList($items, $params)
+                                ->dropDownList(\yii\helpers\ArrayHelper::map($items, 'id', 'position_title'), $params)
                                 ->label(false) ?>
                         </div>
                     </div>

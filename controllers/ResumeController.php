@@ -4,6 +4,7 @@
 namespace app\controllers;
 
 
+use app\models\Position;
 use app\models\Resume;
 use Yii;
 use yii\web\Controller;
@@ -14,7 +15,8 @@ class ResumeController extends Controller
     public function actionView($id)
     {
         $resume = Resume::findOne($id);
-
+        $resume->getPosition0()->select('position_title');
+        $position_title = $resume->getPosition0()->select('position_title')->one();
         $resume->view_count += 1;
         $resume->save();
 
@@ -27,32 +29,39 @@ class ResumeController extends Controller
         }
 
 
-        $positions = array_flip(Resume::getSelectItems());
+        $positions = Position::find()->asArray()->all();
 
 
         if (empty($resume)) {
             throw new NotFoundHttpException('Резюме не найдено');
         }
 
-        return $this->render('view', compact('resume', 'positions'));
+        return $this->render('view', compact('resume', 'positions', 'position_title'));
     }
 
     public function actionViewAll()
     {
-        $resume = Resume::find()->where(['user_id' => 3])->all();//todo заменить на id авторизованного юзера
-        $resumeCount = Resume::find()->where(['user_id' => 3])->count();
-        $positions = array_flip(Resume::getSelectItems());
+        $resume = Resume::find()->where(['user_id' => 10])->all();//todo заменить на id авторизованного юзера
 
-        return $this->render('view-all', compact('resume', 'resumeCount', 'positions'));
+        $resumeCount = Resume::find()->where(['user_id' => 10])->count();
+        $position_titles = [];
+        $positions = Position::find()->select('position_title')->asArray()->all();
+
+        foreach ($positions as $position) {
+            array_push($position_titles, $position['position_title']);
+        }
+        $position_titles = array_flip($position_titles);
+
+        return $this->render('view-all', compact('resume', 'resumeCount', 'position_titles'));
     }
 
 
     public function actionAddResume()
     {
         $resume = new Resume();
-        $resume->user_id = rand(1, 10);
+        $items = Position::find()->asArray()->all();
 
-        $items = $resume->getSelectItems();
+        $resume->user_id = rand(1, 10);
 
         $params = $resume->getSelectParams();
 
@@ -68,7 +77,6 @@ class ResumeController extends Controller
             if (is_array($resume->schedule)) {
                 $resume->schedule = serialize($resume->schedule);
             }
-
             if ($resume->save()) {
                 Yii::$app->session->setFlash('success', 'Резюме успешно сохранено');
                 return $this->refresh();
