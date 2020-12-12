@@ -26,13 +26,15 @@
                             </div>
                         </div>
                         <div class="vakancy-page-wrap show">
-<!--                            <a class="vakancy-page-btn vakancy-btn dropdown-toggle" href="#" role="button"-->
-<!--                               id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"-->
-<!--                               aria-expanded="false">-->
-<!--                                По новизне-->
-<!--                                <i class="fas fa-angle-down arrowDown"></i>-->
-<!--                            </a>-->
-                            <?= $sort->link('created_at') ?>
+                            <?= $sort->link(
+                                'created_at',
+                                [
+                                    'class' => 'vakancy-page-btn vakancy-btn dropdown-toggle',
+                                    'id' => 'dropdownMenuLink',
+                                    'data-toggle' => 'dropdown'
+                                ]
+                            ) ?>
+
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item" href="#">По новизне</a>
                                 <a class="dropdown-item" href="#">По возрастанию зарплаты</a>
