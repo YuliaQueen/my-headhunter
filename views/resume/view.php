@@ -10,7 +10,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="mt8 mb32"><a href="#"><img src="images/blue-left-arrow.svg" alt="arrow"> Резюме в
+                <div class="mt8 mb32"><a href="<?php Yii::$app->request->referrer; ?>"><img
+                                src="images/blue-left-arrow.svg" alt="arrow"> Резюме в
                         <?= $resume->city ?></a>
                 </div>
             </div>
@@ -24,7 +25,7 @@
                 <div class="main-title d-md-flex justify-content-between align-items-center mobile-mb16"><?= /** @var array $positions */
                     array_search($resume->position, $positions) ?></div>
                 <div class="paragraph-lead mb16">
-                    <span class="mr24"><?=  $resume->salary ?> ₽</span>
+                    <span class="mr24"><?= $resume->salary ?> ₽</span>
                     <span>Опыт работы 3 года</span>
                 </div>
                 <div class="profile-info company-profile-info resume-view__info-blick">

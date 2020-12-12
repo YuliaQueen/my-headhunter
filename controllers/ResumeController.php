@@ -26,7 +26,6 @@ class ResumeController extends Controller
         }
 
 
-
         $positions = array_flip(Resume::getSelectItems());
 
 
@@ -39,8 +38,13 @@ class ResumeController extends Controller
 
     public function actionViewAll()
     {
-        return $this->render('view-all');
+        $resume = Resume::find()->where(['user_id' => 3])->all();//todo заменить на id авторизованного юзера
+        $resumeCount = Resume::find()->where(['user_id' => 3])->count();
+        $positions = array_flip(Resume::getSelectItems());
+
+        return $this->render('view-all', compact('resume', 'resumeCount', 'positions'));
     }
+
 
 
     public function actionAddResume()
