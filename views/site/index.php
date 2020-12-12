@@ -87,7 +87,7 @@
                             <div class="company-list-search__block-middle">
                                 <h3 class="mini-title desktop-off">PHP разработчик</h3>
                                 <p class="paragraph mb16 mobile-mb32">
-                                    <?= ($item->note) ? substr($item->note, 0, 220)
+                                    <?= ($item->note) ? mb_strimwidth($item->note, 0, 200, '...')
                                         : "Информация не указана" ?>
                                 </p>
                             </div>
