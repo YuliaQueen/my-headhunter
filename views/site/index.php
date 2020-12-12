@@ -26,12 +26,13 @@
                             </div>
                         </div>
                         <div class="vakancy-page-wrap show">
-                            <a class="vakancy-page-btn vakancy-btn dropdown-toggle" href="#" role="button"
-                               id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                               aria-expanded="false">
-                                По новизне
-                                <i class="fas fa-angle-down arrowDown"></i>
-                            </a>
+<!--                            <a class="vakancy-page-btn vakancy-btn dropdown-toggle" href="#" role="button"-->
+<!--                               id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"-->
+<!--                               aria-expanded="false">-->
+<!--                                По новизне-->
+<!--                                <i class="fas fa-angle-down arrowDown"></i>-->
+<!--                            </a>-->
+                            <?= $sort->link('created_at') ?>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item" href="#">По новизне</a>
                                 <a class="dropdown-item" href="#">По возрастанию зарплаты</a>
@@ -66,7 +67,7 @@
                                 <div class="mini-paragraph cadet-blue mobile-mb12">Обновлено <?= date(
                                         'd-m-Y в H:m:s',
                                         strtotime(
-                                            $item->updated_at
+                                            $item->created_at
                                         )
                                     ) ?></div>
                                 <h3 class="mini-title mobile-off"><?= /** @var array $positions */

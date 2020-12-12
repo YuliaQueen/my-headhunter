@@ -37,10 +37,9 @@
                     <div class="profile-info__block company-profile-info__block mb8">
                         <div class="profile-info__block-left company-profile-info__block-left">Возраст
                         </div>
-                        <div class="profile-info__block-right company-profile-info__block-right"><?= floor(
+                        <div class="profile-info__block-right company-profile-info__block-right"><?= $years = floor(
                                 (time() - strtotime($resume->birthday)) / (60 * 60 * 24 * 365.25)
-                            ); ?> года
-                        </div>
+                            ); ?> <?= num2word($years, ['год', 'года', 'лет']) ?></div>
                     </div>
                     <div class="profile-info__block company-profile-info__block mb8">
                         <div class="profile-info__block-left company-profile-info__block-left">Занятость</div>

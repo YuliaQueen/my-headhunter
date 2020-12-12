@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Resume;
 use yii\data\Pagination;
+use yii\data\Sort;
 use yii\web\Controller;
 
 class SiteController extends Controller
@@ -23,7 +24,21 @@ class SiteController extends Controller
     {
         $positions = array_flip(Resume::getSelectItems());
 
-        $query= Resume::find();
+        $sort = new Sort(
+            [
+                'attributes' => [
+                    'created_at' => [
+                        'asc' => ['created_at' => SORT_ASC],
+                        'desc'=> ['created_at' => SORT_DESC],
+                        'default' => SORT_DESC,
+                        'label' => 'По новизне'
+                    ]
+                ]
+            ]
+        );
+
+
+        $query = Resume::find();
 
         $queryCount = $query->count();
 
@@ -32,10 +47,10 @@ class SiteController extends Controller
             ['totalCount' => $query->count(), 'pageSize' => 3, 'forcePageParam' => false, 'pageSizeParam' => false]
         );
 
-        $resumes = $query->offset($pages->offset)->limit($pages->limit)->all();
+        $resumes = $query->offset($pages->offset)->limit($pages->limit)->orderBy($sort->orders)->all();
 
 
-        return $this->render('index', compact('pages', 'positions', 'resumes', 'queryCount'));
+        return $this->render('index', compact('pages', 'positions', 'resumes', 'queryCount', 'sort'));
     }
 
 
