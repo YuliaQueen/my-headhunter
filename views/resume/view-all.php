@@ -58,7 +58,7 @@
                                                 <div class="d-flex flex-wrap">
                                                     <div class="paragraph mr16">
                                                         <strong>Просмотров </strong>
-                                                        <span class="grey"><?= rand(0, 100); ?></span>
+                                                        <span class="grey"><?= $item->view_count; ?></span>
                                                     </div>
                                                 </div>
                                             </div>

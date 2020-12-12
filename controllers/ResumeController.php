@@ -5,11 +5,9 @@ namespace app\controllers;
 
 
 use app\models\Resume;
-use app\models\UploadImage;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\UploadedFile;
 
 class ResumeController extends Controller
 {
@@ -17,11 +15,14 @@ class ResumeController extends Controller
     {
         $resume = Resume::findOne($id);
 
+        $resume->view_count += 1;
+        $resume->save();
+
         if (!empty($resume->schedule)) {
             $resume->schedule = implode(', ', unserialize($resume->schedule));
         }
 
-        if (!empty($resume->employment)){
+        if (!empty($resume->employment)) {
             $resume->employment = implode(', ', unserialize($resume->employment));
         }
 
@@ -46,7 +47,6 @@ class ResumeController extends Controller
     }
 
 
-
     public function actionAddResume()
     {
         $resume = new Resume();
@@ -63,11 +63,15 @@ class ResumeController extends Controller
         if ($resume->load(Yii::$app->request->post())) {
             if (is_array($resume->employment)) {
                 $resume->employment = serialize($resume->employment);
-            } else $resume->employment = null;
+            } else {
+                $resume->employment = null;
+            }
 
             if (is_array($resume->schedule)) {
                 $resume->schedule = serialize($resume->schedule);
-            } else $resume->schedule = null;
+            } else {
+                $resume->schedule = null;
+            }
 
             if ($resume->save()) {
                 Yii::$app->session->setFlash('success', 'Резюме успешно сохранено');

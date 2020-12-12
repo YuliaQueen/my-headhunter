@@ -28,6 +28,7 @@ use yii\db\Expression;
  * @property string|null $note
  * @property string $created_at
  * @property string $updated_at
+ * @property int $view_count
  */
 class Resume extends \yii\db\ActiveRecord
 {
@@ -76,7 +77,7 @@ class Resume extends \yii\db\ActiveRecord
                 'required'
             ],
             [['birthday', 'created_at', 'updated_at', 'employment', 'schedule'], 'safe'],
-            [['user_id', 'experience'], 'integer'],
+            [['user_id', 'experience', 'view_count'], 'integer'],
             [['jobs', 'note'], 'string'],
             [['first_name', 'middle_name', 'last_name'], 'string', 'max' => 100],
             [['gender'], 'string', 'max' => 4],
