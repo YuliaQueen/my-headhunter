@@ -63,14 +63,10 @@ class ResumeController extends Controller
         if ($resume->load(Yii::$app->request->post())) {
             if (is_array($resume->employment)) {
                 $resume->employment = serialize($resume->employment);
-            } else {
-                $resume->employment = null;
             }
 
             if (is_array($resume->schedule)) {
                 $resume->schedule = serialize($resume->schedule);
-            } else {
-                $resume->schedule = null;
             }
 
             if ($resume->save()) {

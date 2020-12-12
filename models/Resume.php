@@ -14,6 +14,7 @@ use yii\db\Expression;
  * @property string $first_name
  * @property string $middle_name
  * @property string $last_name
+ * @property string $img_path
  * @property string $birthday
  * @property string $gender
  * @property string $city
@@ -81,9 +82,9 @@ class Resume extends \yii\db\ActiveRecord
             [['jobs', 'note'], 'string'],
             [['first_name', 'middle_name', 'last_name'], 'string', 'max' => 100],
             [['gender'], 'string', 'max' => 4],
-            [['city', 'email'], 'string', 'max' => 250],
+            [['city', 'email', 'img_path'], 'string', 'max' => 250],
             [['phone'], 'string', 'max' => 12],
-            [['position', 'salary'], 'string', 'max' => 20],
+            [['position', 'salary'], 'string', 'max' => 100],
         ];
     }
 
