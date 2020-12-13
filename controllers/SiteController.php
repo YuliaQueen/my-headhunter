@@ -36,9 +36,11 @@ class SiteController extends Controller
         $searchModel = new ResumeSearch();
 
         if (Yii::$app->request->getIsPost()) {
+//            var_dump($_POST);
             $searchModel->city = $_POST['SearchModel']['city'];
             $searchModel->salary = $_POST['SearchModel']['salary'];
             $searchModel->position = $_POST['SearchModel']['position'];
+            $searchModel->gender = $_POST['SearchModel']['gender'];
         }
 
         $sort = new Sort(
@@ -66,6 +68,10 @@ class SiteController extends Controller
 
         if ($searchModel->position) {
             $query->andWhere(['position' => $searchModel->position]);
+        }
+
+        if ($searchModel->gender) {
+            $query->andWhere(['gender' => $searchModel->gender]);
         }
 
         $queryCount = $query->count();

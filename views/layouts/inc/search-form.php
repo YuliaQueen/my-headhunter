@@ -13,9 +13,15 @@ $form = ActiveForm::begin(
     <img class="cursor-p" src="images/big-cancel.svg" alt="cancel">
 </div>
 <div class="signin-modal__switch-btns-wrap resume-list__switch-btns-wrap mb16">
-    <a href="#" class="signin-modal__switch-btn active">Все</a>
-    <a href="#" class="signin-modal__switch-btn ">Мужчины</a>
-    <a href="#" class="signin-modal__switch-btn ">Женщины</a>
+    <button name="SearchModel[gender]" role="radio" value=" " style="cursor: pointer"
+            class="signin-modal__switch-btn active">Все
+    </button>
+    <button name="SearchModel[gender]" role="radio" value="0" style="cursor: pointer" class="signin-modal__switch-btn">
+        Мужчины
+    </button>
+    <button name="SearchModel[gender]" role="radio" value="1" style="cursor: pointer" class="signin-modal__switch-btn">
+        Женщины
+    </button>
 </div>
 <div class="vakancy-page-filter-block__row mb24">
     <div class="paragraph cadet-blue">Город</div>
