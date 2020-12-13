@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-/* @var object $resumes */
+/* @var object $resume */
 /* @var integer $queryCount */
 
 ?>
@@ -11,7 +11,7 @@
 
 <div class="content">
     <div class="container">
-        <h1 class="main-title mt24 mb16">Поиск:  <?= $q; ?></h1>
+        <h1 class="main-title mt24 mb16">Поиск: <?= $q; ?></h1>
         <button class="vacancy-filter-btn">Фильтр</button>
         <div class="row">
             <div class="col-lg-9 desctop-992-pr-16">
@@ -26,14 +26,14 @@
                             </div>
                         </div>
                         <div class="vakancy-page-wrap show">
-<!--                            --><?//= $sort->link(
-//                                'created_at',
-//                                [
-//                                    'class' => 'vakancy-page-btn vakancy-btn dropdown-toggle',
-//                                    'id' => 'dropdownMenuLink',
-//                                    'data-toggle' => 'dropdown'
-//                                ]
-//                            ) ?>
+                            <!--                            --><? //= $sort->link(
+                            //                                'created_at',
+                            //                                [
+                            //                                    'class' => 'vakancy-page-btn vakancy-btn dropdown-toggle',
+                            //                                    'id' => 'dropdownMenuLink',
+                            //                                    'data-toggle' => 'dropdown'
+                            //                                ]
+                            //                            ) ?>
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item" href="#">По новизне</a>
@@ -45,7 +45,7 @@
                 </div>
                 <?php
 
-                if (empty($resumes)): ?>
+                if (empty($resume)): ?>
 
                     <h3 class="mini-title mobile-off">Резюме не найдено</h3>
 
@@ -53,7 +53,7 @@
 
                     <?php
                     foreach (
-                        $resumes
+                        $resume
 
                         as $item
                     ): ?>
@@ -72,8 +72,8 @@
                                             $item->created_at
                                         )
                                     ) ?></div>
-                                <h3 class="mini-title mobile-off"><?= /** @var array $positions */
-                                    array_search($item->position, $positions) ?></h3>
+                                <h3 class="mini-title mobile-off"><?= /** @var array $position_titles */
+                                    array_search($item->position - 1, $position_titles) ?></h3>
                                 <div class="d-flex align-items-center flex-wrap mb8 ">
                                     <span class="mr16 paragraph"><?= $item->salary ?></span>
                                     <span class="mr16 paragraph"><?= ($item->experience) ? $item->experience : "Нет опыта" ?></span>
@@ -98,12 +98,12 @@
                 ?>
                 <ul class="dor-pagination mb128">
 
-<!--                    --><?//= /** @var object $pages */
-//                    \yii\widgets\LinkPager::widget(
-//                        [
-//                            'pagination' => $pages,
-//                        ]
-//                    ) ?>
+                    <!--                    --><? //= /** @var object $pages */
+                    //                    \yii\widgets\LinkPager::widget(
+                    //                        [
+                    //                            'pagination' => $pages,
+                    //                        ]
+                    //                    ) ?>
 
                 </ul>
             </div>

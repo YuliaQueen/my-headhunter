@@ -47,7 +47,7 @@
                                             </div>
                                             <div class="col-xl-12 my-vacancies-block__left-col mb16">
                                                 <h2 class="mini-title mb8"><?= /** @var array $position_titles */
-                                                    array_search($item->position, $position_titles)  ?></h2>
+                                                    array_search($item->position-1, $position_titles)  ?></h2>
                                                 <div class="d-flex align-items-center flex-wrap mb8 ">
                                                     <span class="mr16 paragraph"><?= $item->salary . ' руб' ?></span>
                                                     <span class="mr16 paragraph"><?= ($item->experience) ? $item->experience : "Нет опыта" ?></span>

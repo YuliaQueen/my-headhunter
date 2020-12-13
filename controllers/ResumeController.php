@@ -68,7 +68,6 @@ class ResumeController extends Controller
         $scheduleCheck = $resume->getScheduleCheckboxItems();
         $employmentCheck = $resume->getEmploymentCheckboxItems();
 
-
         if ($resume->load(Yii::$app->request->post())) {
             if (is_array($resume->employment)) {
                 $resume->employment = serialize($resume->employment);

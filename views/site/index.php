@@ -73,7 +73,7 @@
                                         )
                                     ) ?></div>
                                 <h3 class="mini-title mobile-off"><?= /** @var array $position_titles */
-                                    array_search($item->position, $position_titles) ?></h3>
+                                    array_search($item->position-1, $position_titles) ?></h3>
                                 <div class="d-flex align-items-center flex-wrap mb8 ">
                                     <span class="mr16 paragraph"><?= $item->salary ?></span>
                                     <span class="mr16 paragraph"><?= ($item->experience) ? $item->experience : "Нет опыта" ?></span>

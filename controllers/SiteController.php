@@ -40,7 +40,7 @@ class SiteController extends Controller
                 'attributes' => [
                     'created_at' => [
                         'asc' => ['created_at' => SORT_ASC],
-                        'desc'=> ['created_at' => SORT_DESC],
+                        'desc' => ['created_at' => SORT_DESC],
                         'default' => SORT_DESC,
                         'label' => 'По новизне'
                     ]
@@ -77,7 +77,7 @@ class SiteController extends Controller
                 'attributes' => [
                     'created_at' => [
                         'asc' => ['created_at' => SORT_ASC],
-                        'desc'=> ['created_at' => SORT_DESC],
+                        'desc' => ['created_at' => SORT_DESC],
                         'default' => SORT_DESC,
                         'label' => 'По новизне'
                     ]
@@ -85,7 +85,18 @@ class SiteController extends Controller
             ]
         );
 
-        $query = Resume::find()->where(['like', 'position', $q]);
+        $positions = Position::find()->select('position_title')->asArray()->all();
+        $position_titles = [];
+
+        foreach ($positions as $position) {
+            array_push($position_titles, $position['position_title']);
+        }
+        $position_titles = array_flip($position_titles);
+
+        $query = Resume::find()
+            ->select('*, resume.id')
+            ->join('LEFT JOIN', 'position', 'resume.position = position.id')
+            ->where(['like', 'position_title', $q]);
 
         $pages = new Pagination(
             ['totalCount' => $query->count(), 'pageSize' => 8, 'forcePageParam' => false, 'pageSizeParam' => false]
@@ -93,7 +104,7 @@ class SiteController extends Controller
 
         $resume = $query->offset($pages->offset)->limit($pages->limit)->orderBy($sort->orders)->all();
 
-        return $this->render('search', compact('resume', 'pages', 'q', 'sort'));
+        return $this->render('search', compact('resume', 'pages', 'q', 'sort', 'position_titles'));
     }
 
 

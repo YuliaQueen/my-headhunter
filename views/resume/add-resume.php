@@ -2,8 +2,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="mt8 mb40"><a href="<?= \yii\helpers\Url::home() ?>"><img src="images/blue-left-arrow.svg"
-                                                                                     alt="arrow"> Вернуться без
+                <div class="mt8 mb40"><a href="<?= Yii::$app->request->referrer; ?>"><img
+                                src="images/blue-left-arrow.svg"
+                                alt="arrow"> Вернуться без
                         сохранения</a>
                 </div>
             </div>
