@@ -11,7 +11,7 @@
 
 <div class="content">
     <div class="container">
-        <h1 class="main-title mt24 mb16">PHP разработчики в Кемерово</h1>
+        <h1 class="main-title mt24 mb16">Все резюме на сайте Test Task Head Hunter</h1>
         <button class="vacancy-filter-btn">Фильтр</button>
         <div class="row">
             <div class="col-lg-9 desctop-992-pr-16">

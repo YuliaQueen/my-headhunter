@@ -5,8 +5,10 @@ namespace app\controllers;
 use app\models\Position;
 use app\models\Resume;
 use app\models\ResumeSearch;
+use Yii;
 use yii\data\Pagination;
 use yii\data\Sort;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
 class SiteController extends Controller
@@ -24,16 +26,20 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $positions = Position::find()->select('position_title')->asArray()->all();
-        $position_titles = [];
+        $position_titles = array_flip(
+            ArrayHelper::getColumn(Position::find()
+                                       ->select('position_title')
+                                       ->asArray()
+                                       ->all(), 'position_title')
+        );
 
-        foreach ($positions as $position) {
-            array_push($position_titles, $position['position_title']);
-        }
-        $position_titles = array_flip($position_titles);
-
-        $filterCategories = null;
         $searchModel = new ResumeSearch();
+
+        if (Yii::$app->request->getIsPost()) {
+            $searchModel->city = $_POST['SearchModel']['city'];
+            $searchModel->salary = $_POST['SearchModel']['salary'];
+            $searchModel->position = $_POST['SearchModel']['position'];
+        }
 
         $sort = new Sort(
             [
@@ -48,8 +54,19 @@ class SiteController extends Controller
             ]
         );
 
-
         $query = Resume::find();
+
+        if ($searchModel->city) {
+            $query->andWhere(['city' => $searchModel->city]);
+        }
+
+        if ($searchModel->salary) {
+            $query->andWhere(['>=', 'salary', $searchModel->salary]);
+        }
+
+        if ($searchModel->position) {
+            $query->andWhere(['position' => $searchModel->position]);
+        }
 
         $queryCount = $query->count();
 
@@ -60,8 +77,10 @@ class SiteController extends Controller
 
         $resumes = $query->offset($pages->offset)->limit($pages->limit)->orderBy($sort->orders)->all();
 
-
-        return $this->render('index', compact('pages', 'position_titles', 'resumes', 'queryCount', 'sort'));
+        return $this->render(
+            'index',
+            compact('pages', 'position_titles', 'resumes', 'queryCount', 'sort', 'searchModel')
+        );
     }
 
     public function actionSearch()

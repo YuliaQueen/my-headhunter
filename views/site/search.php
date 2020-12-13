@@ -11,7 +11,7 @@
 
 <div class="content">
     <div class="container">
-        <h1 class="main-title mt24 mb16">Поиск: <?= $q; ?></h1>
+        <h1 class="main-title mt24 mb16">Поиск по резюме: <?= $q; ?></h1>
         <button class="vacancy-filter-btn">Фильтр</button>
         <div class="row">
             <div class="col-lg-9 desctop-992-pr-16">
