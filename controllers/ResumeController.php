@@ -32,7 +32,6 @@ class ResumeController extends Controller
             $resume->employment = implode(', ', unserialize($resume->employment));
         }
 
-
         if (empty($resume)) {
             throw new NotFoundHttpException('Резюме не найдено');
         }
