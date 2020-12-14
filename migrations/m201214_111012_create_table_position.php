@@ -12,12 +12,18 @@ class m201214_111012_create_table_position extends Migration
      */
     public function safeUp()
     {
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
+        };
+
         $this->createTable(
-            'position',
+            '{{%position}}',
             [
                 'id' => $this->primaryKey(),
                 'position_title' => $this->string(250)->notNull()
-            ]
+            ],
+            $tableOptions
         );
 
         $this->insert('position', ['id' => '1', 'position_title' => 'Администратор баз данных']);
@@ -52,9 +58,7 @@ class m201214_111012_create_table_position extends Migration
      */
     public function safeDown()
     {
-        echo "m201214_111012_create_table_position cannot be reverted.\n";
-
-        return false;
+        $this->dropTable('{{%position}}');
     }
 
     /*

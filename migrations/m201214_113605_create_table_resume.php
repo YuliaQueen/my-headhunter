@@ -12,8 +12,13 @@ class m201214_113605_create_table_resume extends Migration
      */
     public function safeUp()
     {
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
+        };
+
         $this->createTable(
-            'resume',
+            '{{%resume}}',
             [
                 'id' => $this->primaryKey(),
                 'user_id' => $this->integer(10)->unsigned(),
@@ -36,7 +41,8 @@ class m201214_113605_create_table_resume extends Migration
                 'created_at' => $this->dateTime()->notNull(),
                 'updated_at' => $this->dateTime()->notNull(),
                 'view_count' => $this->integer(11)->notNull()->defaultValue(0),
-            ]
+            ],
+            $tableOptions
         );
 
         $this->addForeignKey(
@@ -55,9 +61,7 @@ class m201214_113605_create_table_resume extends Migration
      */
     public function safeDown()
     {
-        echo "m201214_113605_create_table_resume cannot be reverted.\n";
-
-        return false;
+        $this->dropTable('{{%resume}}');
     }
 
     /*
