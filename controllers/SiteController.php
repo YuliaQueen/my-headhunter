@@ -2,13 +2,11 @@
 
 namespace app\controllers;
 
-use app\models\Position;
 use app\models\Resume;
 use app\models\ResumeSearch;
 use Yii;
 use yii\data\Pagination;
 use yii\data\Sort;
-use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
 class SiteController extends Controller
@@ -26,7 +24,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $position_titles = getPositionTitles();
+        $positionTitles = getPositionTitles();
 
         $searchModel = new ResumeSearch();
 
@@ -79,7 +77,7 @@ class SiteController extends Controller
 
         return $this->render(
             'index',
-            compact('pages', 'position_titles', 'resumes', 'queryCount', 'sort', 'searchModel')
+            compact('pages', 'positionTitles', 'resumes', 'queryCount', 'sort', 'searchModel')
         );
     }
 
@@ -104,7 +102,7 @@ class SiteController extends Controller
             ]
         );
 
-        $position_titles = getPositionTitles();
+        $positionTitles = getPositionTitles();
 
         $query = Resume::find()
             ->select('*, resume.id')
@@ -115,9 +113,11 @@ class SiteController extends Controller
             ['totalCount' => $query->count(), 'pageSize' => 8, 'forcePageParam' => false, 'pageSizeParam' => false]
         );
 
+        $queryCount = $query->count();
+
         $resume = $query->offset($pages->offset)->limit($pages->limit)->orderBy($sort->orders)->all();
 
-        return $this->render('search', compact('resume', 'pages', 'q', 'sort', 'position_titles'));
+        return $this->render('search', compact('resume', 'pages', 'q', 'sort', 'positionTitles', 'queryCount'));
     }
 
 

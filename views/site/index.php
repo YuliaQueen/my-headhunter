@@ -4,6 +4,7 @@
 
 /* @var object $resumes */
 /* @var integer $queryCount */
+/* @var object $sort */
 
 ?>
 
@@ -26,7 +27,8 @@
                             </div>
                         </div>
                         <div class="vakancy-page-wrap show">
-                            <?= $sort->link(
+                            <?=
+                            $sort->link(
                                 'created_at',
                                 [
                                     'class' => 'vakancy-page-btn vakancy-btn dropdown-toggle',
@@ -72,8 +74,8 @@
                                             $item->created_at
                                         )
                                     ) ?></div>
-                                <h3 class="mini-title mobile-off"><?= /** @var array $position_titles */
-                                    array_search($item->position-1, $position_titles) ?></h3>
+                                <h3 class="mini-title mobile-off"><?= /** @var array $positionTitles */
+                                    array_search($item->position - 1, $positionTitles) ?></h3>
                                 <div class="d-flex align-items-center flex-wrap mb8 ">
                                     <span class="mr16 paragraph"><?= $item->salary ?></span>
                                     <span class="mr16 paragraph"><?= ($item->experience) ? $item->experience : "Нет опыта" ?></span>

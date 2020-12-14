@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 
 /* @var object $resume */
+/* @var object $sort */
 /* @var integer $queryCount */
 
 ?>
@@ -26,14 +27,14 @@
                             </div>
                         </div>
                         <div class="vakancy-page-wrap show">
-                            <!--                            --><? //= $sort->link(
-                            //                                'created_at',
-                            //                                [
-                            //                                    'class' => 'vakancy-page-btn vakancy-btn dropdown-toggle',
-                            //                                    'id' => 'dropdownMenuLink',
-                            //                                    'data-toggle' => 'dropdown'
-                            //                                ]
-                            //                            ) ?>
+                            <? $sort->link(
+                                'created_at',
+                                [
+                                    'class' => 'vakancy-page-btn vakancy-btn dropdown-toggle',
+                                    'id' => 'dropdownMenuLink',
+                                    'data-toggle' => 'dropdown'
+                                ]
+                            ) ?>
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item" href="#">По новизне</a>
@@ -72,8 +73,8 @@
                                             $item->created_at
                                         )
                                     ) ?></div>
-                                <h3 class="mini-title mobile-off"><?= /** @var array $position_titles */
-                                    array_search($item->position - 1, $position_titles) ?></h3>
+                                <h3 class="mini-title mobile-off"><?= /** @var array $positionTitles */
+                                    array_search($item->position - 1, $positionTitles) ?></h3>
                                 <div class="d-flex align-items-center flex-wrap mb8 ">
                                     <span class="mr16 paragraph"><?= $item->salary ?></span>
                                     <span class="mr16 paragraph"><?= ($item->experience) ? $item->experience : "Нет опыта" ?></span>
@@ -98,12 +99,12 @@
                 ?>
                 <ul class="dor-pagination mb128">
 
-                    <!--                    --><? //= /** @var object $pages */
-                    //                    \yii\widgets\LinkPager::widget(
-                    //                        [
-                    //                            'pagination' => $pages,
-                    //                        ]
-                    //                    ) ?>
+                    <?= /** @var object $pages */
+                    \yii\widgets\LinkPager::widget(
+                        [
+                            'pagination' => $pages,
+                        ]
+                    ) ?>
 
                 </ul>
             </div>

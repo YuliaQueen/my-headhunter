@@ -6,10 +6,8 @@ namespace app\controllers;
 
 use app\components\Employments;
 use app\components\Schedule;
-use app\models\Position;
 use app\models\Resume;
 use Yii;
-use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -19,7 +17,7 @@ class ResumeController extends Controller
     {
         $resume = Resume::findOne($id);
 
-        $position_title = $resume->getPosition()->select('position_title')->one();
+        $positionTitle = $resume->getPosition()->select('position_title')->one();
 
         $resume->view_count += 1;
         $resume->save();
@@ -36,7 +34,7 @@ class ResumeController extends Controller
             throw new NotFoundHttpException('Резюме не найдено');
         }
 
-        return $this->render('view', compact('resume', 'position_title'));
+        return $this->render('view', compact('resume', 'positionTitle'));
     }
 
     public function actionViewAll()
@@ -45,9 +43,9 @@ class ResumeController extends Controller
 
         $resumeCount = Resume::find()->where(['user_id' => 10])->count();
 
-        $position_titles = getPositionTitles();
+        $positionTitles = getPositionTitles();
 
-        return $this->render('view-all', compact('resume', 'resumeCount', 'position_titles'));
+        return $this->render('view-all', compact('resume', 'resumeCount', 'positionTitles'));
     }
 
 

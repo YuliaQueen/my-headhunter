@@ -5,7 +5,7 @@
                 <a href="#"><img src="images/dark-search.svg" alt="search"
                                  class="dark-search-icon header-search__icon"></a>
                 <input class="header-search__input" name="q" type="text" placeholder="Поиск по резюме и навыкам">
-                <a href="<?= \yii\helpers\Url::to(['site/search']); ?>" type="button" class="blue-btn header-search__btn">Найти</a>
+                <?= \yii\helpers\Html::submitButton('Найти',['class'=>'blue-btn header-search__btn']) ?>
             </form>
         </div>
     </div>

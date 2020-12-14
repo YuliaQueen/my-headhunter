@@ -3,6 +3,8 @@
 /* @var $this yii\web\View */
 
 /** @var object $resume */
+
+/** @var array $positionTitle */
 ?>
 
 <div class="content p-rel">
@@ -21,9 +23,8 @@
                 </div>
             </div>
             <div class="col-lg-8 col-md-7">
-                <div class="main-title d-md-flex justify-content-between align-items-center mobile-mb16"><?=
-                    /** @var array $position_title */
-                    $position_title['position_title'] ?></div>
+                <div class="main-title d-md-flex justify-content-between align-items-center mobile-mb16">
+                    <?= $positionTitle['position_title'] ?></div>
                 <div class="paragraph-lead mb16">
                     <span class="mr24"><?= $resume->salary ?> ₽</span>
                     <span>Опыт работы 3 года</span>
