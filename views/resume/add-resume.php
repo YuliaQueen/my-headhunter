@@ -1,3 +1,12 @@
+<?php
+/* @var $this yii\web\View */
+
+/** @var object $resume */
+
+$items = \app\models\Position::find()->asArray()->all();
+$params = ['prompt' => 'Выберите профессию...', 'class' => 'nselect-1'];
+?>
+
 <div class="content p-rel">
     <div class="container">
         <div class="row">
@@ -37,7 +46,6 @@
                         <div class="paragraph">Фамилия</div>
                     </div>
                     <div class="col-lg-3 col-md-4 col-11">
-                        <?php /** @var object $resume */ ?>
                         <?= $form->field($resume, 'last_name')->textInput(['class' => 'dor-input w100'])->label(
                             false
                         ); ?>
@@ -147,9 +155,7 @@
                     </div>
                     <div class="col-lg-3 col-md-4 col-11">
                         <div class="citizenship-select">
-                            <?= /** @var array $items */
-                            /** @var array $params */
-                            /** @var object $resume */
+                            <?=
                             $form->field($resume, 'position')
                                 ->dropDownList(\yii\helpers\ArrayHelper::map($items, 'id', 'position_title'), $params)
                                 ->label(false) ?>

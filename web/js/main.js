@@ -76,6 +76,17 @@ $(function () {
     });
 });
 
+$(function () {
+    if (localStorage.getItem('addClass')) {
+        let targetId = localStorage.getItem('addClass');
 
+        $(`#${targetId}`).addClass('active');
+        $(`#${targetId}`).siblings().removeClass('active');
 
+    }
 
+    $('.signin-modal__switch-btn').on('click', function (el) {
+        $(this).addClass('active');
+        localStorage.setItem('addClass', el.target.id);
+    });
+});

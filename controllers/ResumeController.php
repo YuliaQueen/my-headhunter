@@ -4,9 +4,12 @@
 namespace app\controllers;
 
 
+use app\components\Employments;
+use app\components\Schedule;
 use app\models\Position;
 use app\models\Resume;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -15,8 +18,9 @@ class ResumeController extends Controller
     public function actionView($id)
     {
         $resume = Resume::findOne($id);
-        $resume->getPosition0()->select('position_title');
-        $position_title = $resume->getPosition0()->select('position_title')->one();
+
+        $position_title = $resume->getPosition()->select('position_title')->one();
+
         $resume->view_count += 1;
         $resume->save();
 
@@ -29,14 +33,11 @@ class ResumeController extends Controller
         }
 
 
-        $positions = Position::find()->asArray()->all();
-
-
         if (empty($resume)) {
             throw new NotFoundHttpException('Резюме не найдено');
         }
 
-        return $this->render('view', compact('resume', 'positions', 'position_title'));
+        return $this->render('view', compact('resume', 'position_title'));
     }
 
     public function actionViewAll()
@@ -44,13 +45,8 @@ class ResumeController extends Controller
         $resume = Resume::find()->where(['user_id' => 10])->all();//todo заменить на id авторизованного юзера
 
         $resumeCount = Resume::find()->where(['user_id' => 10])->count();
-        $position_titles = [];
-        $positions = Position::find()->select('position_title')->asArray()->all();
 
-        foreach ($positions as $position) {
-            array_push($position_titles, $position['position_title']);
-        }
-        $position_titles = array_flip($position_titles);
+        $position_titles = getPositionTitles();
 
         return $this->render('view-all', compact('resume', 'resumeCount', 'position_titles'));
     }
@@ -59,14 +55,11 @@ class ResumeController extends Controller
     public function actionAddResume()
     {
         $resume = new Resume();
-        $items = Position::find()->asArray()->all();
 
         $resume->user_id = rand(1, 10);
 
-        $params = $resume->getSelectParams();
-
-        $scheduleCheck = $resume->getScheduleCheckboxItems();
-        $employmentCheck = $resume->getEmploymentCheckboxItems();
+        $scheduleCheck = Schedule::getScheduleCheckboxItems();
+        $employmentCheck = Employments::getEmploymentCheckboxItems();
 
         if ($resume->load(Yii::$app->request->post())) {
             if (is_array($resume->employment)) {
@@ -86,7 +79,7 @@ class ResumeController extends Controller
 
         return $this->render(
             'add-resume',
-            compact('resume', 'items', 'params', 'scheduleCheck', 'employmentCheck', 'image')
+            compact('resume', 'scheduleCheck', 'employmentCheck')
         );
     }
 }

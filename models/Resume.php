@@ -56,7 +56,7 @@ class Resume extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getPosition0()
+    public function getPosition()
     {
         return $this->hasOne(Position::className(), ['id' => 'position']);
     }
@@ -118,32 +118,6 @@ class Resume extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
-    }
-
-    public static function getScheduleCheckboxItems()
-    {
-        return [
-            '0' => 'Полный день',
-            '1' => 'Сменный график',
-            '2' => 'Гибкий график',
-            '3' => 'Удаленная работа',
-        ];
-    }
-
-    public static function getEmploymentCheckboxItems()
-    {
-        return [
-            '0' => 'Полная занятость',
-            '1' => 'Частичная занятость',
-            '2' => 'Проектная/Временная работа',
-            '3' => 'Волонтёрство',
-            '4' => 'Стажировка'
-        ];
-    }
-
-    public static function getSelectParams()
-    {
-        return ['prompt' => 'Выберите профессию...', 'class' => 'nselect-1'];
     }
 
     /**

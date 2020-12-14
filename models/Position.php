@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "position".
  *
@@ -53,4 +51,5 @@ class Position extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Resume::className(), ['position' => 'id']);
     }
+
 }

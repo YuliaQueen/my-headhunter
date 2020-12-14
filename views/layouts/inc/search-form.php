@@ -13,13 +13,15 @@ $form = ActiveForm::begin(
     <img class="cursor-p" src="images/big-cancel.svg" alt="cancel">
 </div>
 <div class="signin-modal__switch-btns-wrap resume-list__switch-btns-wrap mb16">
-    <button name="SearchModel[gender]" role="radio" value=" " style="cursor: pointer"
-            class="signin-modal__switch-btn active">Все
+    <button name="SearchModel[gender]" id="all" role="radio" value="" style="cursor: pointer; border: none"
+            class="signin-modal__switch-btn" href="site/index">Все
     </button>
-    <button name="SearchModel[gender]" role="radio" value="0" style="cursor: pointer" class="signin-modal__switch-btn">
+    <button name="SearchModel[gender]" id="male" role="radio" value="0" style="cursor: pointer; border: none"
+            class="signin-modal__switch-btn" href="#">
         Мужчины
     </button>
-    <button name="SearchModel[gender]" role="radio" value="1" style="cursor: pointer" class="signin-modal__switch-btn">
+    <button name="SearchModel[gender]" id="female" role="radio" value="1" style="cursor: pointer; border: none"
+            class="signin-modal__switch-btn" href="#">
         Женщины
     </button>
 </div>
@@ -95,7 +97,7 @@ $form = ActiveForm::begin(
 <div class="vakancy-page-filter-block__row mb24">
     <div class="paragraph cadet-blue">Тип занятости</div>
     <div class="profile-info">
-        <?php $checkboxes = Resume::getEmploymentCheckboxItems();
+        <?php $checkboxes = \app\components\Employments::getEmploymentCheckboxItems();
         $i = 1;
         foreach ($checkboxes as $checkbox):
             ?>
@@ -111,7 +113,7 @@ $form = ActiveForm::begin(
 <div class="vakancy-page-filter-block__row mb24">
     <div class="paragraph cadet-blue">График работы</div>
     <div class="profile-info">
-        <?php $checkboxes = Resume::getScheduleCheckboxItems();
+        <?php $checkboxes = \app\components\Schedule::getScheduleCheckboxItems();
         $i = 1;
         foreach ($checkboxes as $checkbox):
             ?>

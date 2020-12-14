@@ -26,17 +26,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $position_titles = array_flip(
-            ArrayHelper::getColumn(Position::find()
-                                       ->select('position_title')
-                                       ->asArray()
-                                       ->all(), 'position_title')
-        );
+        $position_titles = getPositionTitles();
 
         $searchModel = new ResumeSearch();
 
         if (Yii::$app->request->getIsPost()) {
-//            var_dump($_POST);
             $searchModel->city = $_POST['SearchModel']['city'];
             $searchModel->salary = $_POST['SearchModel']['salary'];
             $searchModel->position = $_POST['SearchModel']['position'];
@@ -110,13 +104,7 @@ class SiteController extends Controller
             ]
         );
 
-        $positions = Position::find()->select('position_title')->asArray()->all();
-        $position_titles = [];
-
-        foreach ($positions as $position) {
-            array_push($position_titles, $position['position_title']);
-        }
-        $position_titles = array_flip($position_titles);
+        $position_titles = getPositionTitles();
 
         $query = Resume::find()
             ->select('*, resume.id')
