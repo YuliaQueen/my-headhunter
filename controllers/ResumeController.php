@@ -73,6 +73,8 @@ class ResumeController extends Controller
         $scheduleCheck = Schedule::getScheduleCheckboxItems();
         $employmentCheck = Employments::getEmploymentCheckboxItems();
 
+
+
         if ($resume->load(Yii::$app->request->post())) {
             $file = UploadedFile::getInstance($image, 'image');
 

@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Employment;
 use app\models\Position;
 use yii\helpers\ArrayHelper;
 
@@ -39,3 +40,4 @@ function getPositionTitles()
         ArrayHelper::map(Position::find()->all(), 'id', 'position_title')
     );
 }
+
