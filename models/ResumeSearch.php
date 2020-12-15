@@ -12,6 +12,15 @@ use app\models\Resume;
 class ResumeSearch extends Resume
 {
     /**
+     * @var mixed|null
+     */
+    public $employment;
+    /**
+     * @var mixed|null
+     */
+    public $schedule;
+
+    /**
      * {@inheritdoc}
      */
     public function rules()

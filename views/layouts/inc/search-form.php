@@ -103,7 +103,7 @@ $form = ActiveForm::begin(
             ?>
             <div class="form-check d-flex">
                 <input type="checkbox" class="form-check-input" id="employment<?= $i; ?>"
-                       name="Resume[employment][]" value="<?= $checkbox ?>">
+                       name="SearchModel[employment][]" value="<?= $checkbox ?>">
                 <label class="form-check-label" for="employment<?= $i; ?>"></label>
                 <label for="employment<?= $i; ?>" class="profile-info__check-text"><?= $checkbox ?></label>
             </div>
@@ -118,7 +118,7 @@ $form = ActiveForm::begin(
         foreach ($checkboxes as $checkbox):
             ?>
             <div class="form-check d-flex">
-                <input type="checkbox" class="form-check-input" name="Resume[schedule][]"
+                <input type="checkbox" class="form-check-input" name="SearchModel[schedule][]"
                        id="schedule<?= $i; ?>"
                        value="<?= $checkbox; ?>">
                 <label class="form-check-label" for="schedule<?= $i; ?>"></label>

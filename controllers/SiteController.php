@@ -33,6 +33,8 @@ class SiteController extends Controller
             $searchModel->salary = $_POST['SearchModel']['salary'];
             $searchModel->position = $_POST['SearchModel']['position'];
             $searchModel->gender = $_POST['SearchModel']['gender'];
+            $searchModel->employment = $_POST['SearchModel']['employment'];
+            $searchModel->schedule = $_POST['SearchModel']['schedule'];
         }
 
         $sort = new Sort(
@@ -76,6 +78,22 @@ class SiteController extends Controller
 
         if ($searchModel->gender) {
             $query->andWhere(['gender' => $searchModel->gender]);
+        }
+
+        if ($searchModel->employment) {
+            $query->andWhere(['employment.value' => $searchModel->employment])->join(
+                'LEFT JOIN',
+                'employment',
+                'resume.id=employment.resume_id'
+            );
+        }
+
+        if ($searchModel->schedule) {
+            $query->andWhere(['schedule.value' => $searchModel->schedule])->join(
+                'LEFT JOIN',
+                'schedule',
+                'resume.id=schedule.resume_id'
+            );
         }
 
         $queryCount = $query->count();
