@@ -15,7 +15,7 @@ class m201214_113605_create_table_resume extends Migration
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
-        };
+        }
 
         $this->createTable(
             '{{%resume}}',
@@ -33,8 +33,6 @@ class m201214_113605_create_table_resume extends Migration
                 'phone' => $this->string(12)->notNull(),
                 'position' => $this->integer(11)->notNull(),
                 'salary' => $this->string(100)->notNull(),
-                'employment' => $this->text()->defaultValue(null),
-                'schedule' => $this->text()->defaultValue(null),
                 'experience' => $this->tinyInteger(10)->defaultValue(0),
                 'jobs' => $this->text()->defaultValue(null),
                 'note' => $this->text()->defaultValue(null),
@@ -63,19 +61,4 @@ class m201214_113605_create_table_resume extends Migration
     {
         $this->dropTable('{{%resume}}');
     }
-
-    /*
-    // Use up()/down() to run migration code without a transaction.
-    public function up()
-    {
-
-    }
-
-    public function down()
-    {
-        echo "m201214_113605_create_table_resume cannot be reverted.\n";
-
-        return false;
-    }
-    */
 }

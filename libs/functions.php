@@ -36,12 +36,6 @@ function num2word($num, $words)
 function getPositionTitles()
 {
     return array_flip(
-        ArrayHelper::getColumn(
-            Position::find()
-                ->select('position_title')
-                ->asArray()
-                ->all(),
-            'position_title'
-        )
+        ArrayHelper::map(Position::find()->all(), 'id', 'position_title')
     );
 }

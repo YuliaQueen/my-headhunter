@@ -3,8 +3,9 @@
 /* @var $this yii\web\View */
 
 /** @var object $resume */
-
 /** @var array $positionTitle */
+/** @var string $employmentList */
+/** @var string $scheduleList */
 ?>
 
 <div class="content p-rel">
@@ -52,12 +53,12 @@
                     </div>
                     <div class="profile-info__block company-profile-info__block mb8">
                         <div class="profile-info__block-left company-profile-info__block-left">Занятость</div>
-                        <div class="profile-info__block-right company-profile-info__block-right"><?= ($resume->schedule) ? $resume->schedule : 'Не указано' ?></div>
+                        <div class="profile-info__block-right company-profile-info__block-right"><?= ($scheduleList) ? $scheduleList : 'Не указано' ?></div>
                     </div>
                     <div class="profile-info__block company-profile-info__block mb8">
                         <div class="profile-info__block-left company-profile-info__block-left">График работы
                         </div>
-                        <div class="profile-info__block-right company-profile-info__block-right"><?= ($resume->employment) ? $resume->employment : 'Не указано' ?></div>
+                        <div class="profile-info__block-right company-profile-info__block-right"><?= ($employmentList) ? $employmentList : 'Не указано' ?></div>
                     </div>
                     <div class="profile-info__block company-profile-info__block mb8">
                         <div class="profile-info__block-left company-profile-info__block-left">Город проживания

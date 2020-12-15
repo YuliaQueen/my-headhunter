@@ -22,7 +22,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="d-flex">
-                                <div class="paragraph mb8 mr16">У вас <span><?= $resumeCount; ?></span> резюме
+                                <div class="paragraph mb8 mr16">У вас <span><?= $resumeCount ? $resumeCount : 0 ?></span> резюме
                                 </div>
                             </div>
                             <?php if (!empty($resume)):
@@ -78,7 +78,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                <?php endforeach; endif; ?>
+                                <?php endforeach; ?>
+
+                            <?php else: ?>
+
+                                <div class="row">
+                                    <p>Резюме не найдено</p>
+                                </div>
+
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

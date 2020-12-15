@@ -15,7 +15,7 @@ class m201214_111012_create_table_position extends Migration
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
-        };
+        }
 
         $this->createTable(
             '{{%position}}',
@@ -60,19 +60,4 @@ class m201214_111012_create_table_position extends Migration
     {
         $this->dropTable('{{%position}}');
     }
-
-    /*
-    // Use up()/down() to run migration code without a transaction.
-    public function up()
-    {
-
-    }
-
-    public function down()
-    {
-        echo "m201214_111012_create_table_position cannot be reverted.\n";
-
-        return false;
-    }
-    */
 }

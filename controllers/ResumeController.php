@@ -6,9 +6,11 @@ namespace app\controllers;
 
 use app\components\Employments;
 use app\components\Schedule;
+use app\models\Employment;
 use app\models\Resume;
 use app\models\UploadImage;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
@@ -19,31 +21,41 @@ class ResumeController extends Controller
     {
         $resume = Resume::findOne($id);
 
+        $employmentList = ArrayHelper::getColumn(
+            Employment::find()->where(['resume_id' => $id])->all(),
+            'value'
+        );
+
+        $scheduleList = ArrayHelper::getColumn(
+            \app\models\Schedule::find()->where(['resume_id' => $id])->all(),
+            'value'
+        );
+
         $positionTitle = $resume->getPosition()->select('position_title')->one();
 
         $resume->view_count += 1;
         $resume->save();
 
-        if (!empty($resume->schedule)) {
-            $resume->schedule = implode(', ', unserialize($resume->schedule));
+        if ($employmentList) {
+            $employmentList = implode(', ', $employmentList);
         }
 
-        if (!empty($resume->employment)) {
-            $resume->employment = implode(', ', unserialize($resume->employment));
+        if ($scheduleList) {
+            $scheduleList = implode(', ', $scheduleList);
         }
 
         if (empty($resume)) {
             throw new NotFoundHttpException('Резюме не найдено');
         }
 
-        return $this->render('view', compact('resume', 'positionTitle'));
+        return $this->render('view', compact('resume', 'positionTitle', 'employmentList', 'scheduleList'));
     }
 
     public function actionViewAll()
     {
         $resume = Resume::find()->where(['user_id' => 10])->all();//todo заменить на id авторизованного юзера
 
-        $resumeCount = Resume::find()->where(['user_id' => 10])->count();
+        $resumeCount = count($resume);
 
         $positionTitles = getPositionTitles();
 
@@ -62,18 +74,12 @@ class ResumeController extends Controller
         $employmentCheck = Employments::getEmploymentCheckboxItems();
 
         if ($resume->load(Yii::$app->request->post())) {
-
             $file = UploadedFile::getInstance($image, 'image');
 
-            $resume->saveImage($image->uploadImage($file));
-
-            if (is_array($resume->employment)) {
-                $resume->employment = serialize($resume->employment);
+            if ($file) {
+                $resume->saveImage($image->uploadImage($file));
             }
 
-            if (is_array($resume->schedule)) {
-                $resume->schedule = serialize($resume->schedule);
-            }
             if ($resume->save()) {
                 Yii::$app->session->setFlash('success', 'Резюме успешно сохранено');
                 return $this->refresh();

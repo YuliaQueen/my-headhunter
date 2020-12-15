@@ -22,8 +22,6 @@ use yii\db\Expression;
  * @property string $phone
  * @property int $position
  * @property string $salary
- * @property string $employment
- * @property string $schedule
  * @property int $experience
  * @property string|null $jobs
  * @property string|null $note
@@ -82,7 +80,7 @@ class Resume extends \yii\db\ActiveRecord
                 ],
                 'required'
             ],
-            [['birthday', 'created_at', 'updated_at', 'employment', 'schedule'], 'safe'],
+            [['birthday', 'created_at', 'updated_at'], 'safe'],
             [['user_id', 'position', 'experience', 'view_count'], 'integer'],
             [['jobs', 'note'], 'string'],
             [['first_name', 'middle_name', 'last_name'], 'string', 'max' => 100],
@@ -133,6 +131,29 @@ class Resume extends \yii\db\ActiveRecord
         $this->birthday = date('Y-m-d', strtotime($this->birthday));
 
         return true;
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+
+        if ($_POST['Resume']['employment']) {
+            foreach ($_POST['Resume']['employment'] as $item) {
+                $employment = new Employment();
+                $employment->resume_id = $this->id;
+                $employment->value = $item;
+                $employment->save();
+            }
+        }
+
+        if ($_POST['Resume']['schedule']) {
+            foreach ($_POST['Resume']['schedule'] as $item) {
+                $schedule = new Schedule();
+                $schedule->resume_id = $this->id;
+                $schedule->value = $item;
+                $schedule->save();
+            }
+        }
     }
 
     public function saveImage($fileName)
