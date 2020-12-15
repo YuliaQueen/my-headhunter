@@ -29,12 +29,7 @@ class SiteController extends Controller
         $searchModel = new ResumeSearch();
 
         if (Yii::$app->request->getIsPost()) {
-            $searchModel->city = $_POST['SearchModel']['city'];
-            $searchModel->salary = $_POST['SearchModel']['salary'];
-            $searchModel->position = $_POST['SearchModel']['position'];
-            $searchModel->gender = $_POST['SearchModel']['gender'];
-            $searchModel->employment = $_POST['SearchModel']['employment'];
-            $searchModel->schedule = $_POST['SearchModel']['schedule'];
+            $searchModel->attributes = $_POST['SearchModel'];
         }
 
         $sort = new Sort(
