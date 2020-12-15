@@ -47,9 +47,13 @@
                                             </div>
                                             <div class="col-xl-12 my-vacancies-block__left-col mb16">
                                                 <h2 class="mini-title mb8"><?= /** @var array $positionTitles */
-                                                    array_search($item->position-1, $positionTitles)  ?></h2>
+                                                    array_search($item->position - 1, $positionTitles) ?></h2>
                                                 <div class="d-flex align-items-center flex-wrap mb8 ">
-                                                    <span class="mr16 paragraph"><?= $item->salary . ' руб' ?></span>
+                                                    <span class="mr16 paragraph"><?= Yii::$app->formatter->asCurrency(
+                                                            $item->salary,
+                                                            'RUB',
+                                                            [NumberFormatter::FRACTION_DIGITS => 0]
+                                                        ) ?></span>
                                                     <span class="mr16 paragraph"><?= ($item->experience) ? $item->experience : "Нет опыта" ?></span>
                                                     <span class="mr16 paragraph"><?= $item->city ?></span>
                                                 </div>
@@ -67,7 +71,10 @@
                                                         ['resume/view', 'id' => $item->id]
                                                     ) ?>" target="_blank">Открыть</a>
                                                 </div>
-                                                <span class="mini-paragraph cadet-blue">Опубликовано <?= Yii::$app->formatter->asDate($item->created_at, 'long')?></span>
+                                                <span class="mini-paragraph cadet-blue">Опубликовано <?= Yii::$app->formatter->asDate(
+                                                        $item->created_at,
+                                                        'long'
+                                                    ) ?></span>
                                             </div>
                                         </div>
                                     </div>

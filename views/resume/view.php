@@ -19,16 +19,22 @@
         </div>
         <div class="row">
             <div class="col-lg-4 col-md-5 mobile-mb32">
-                <div class="profile-foto resume-profile-foto"><img src="uploads/<?= $resume->img_path; ?>" alt="profile-foto">
+                <div class="profile-foto resume-profile-foto"><img
+                            src="<?= $resume->img_path ? 'uploads/' . $resume->img_path : 'images/nophoto.png' ?>"
+                            alt="profile-foto">
                 </div>
                 <a class="custom-file-upload"
-                   href="<?=\yii\helpers\Url::to(['resume/set-image', 'id' => $resume->id]) ?>">Изменить фото</a>
+                   href="<?= \yii\helpers\Url::to(['resume/set-image', 'id' => $resume->id]) ?>">Изменить фото</a>
             </div>
             <div class="col-lg-8 col-md-7">
                 <div class="main-title d-md-flex justify-content-between align-items-center mobile-mb16">
                     <?= $positionTitle['position_title'] ?></div>
                 <div class="paragraph-lead mb16">
-                    <span class="mr24"><?= $resume->salary ?> ₽</span>
+                    <span class="mr24"><?= Yii::$app->formatter->asCurrency(
+                            $resume->salary,
+                            'RUB',
+                            [NumberFormatter::FRACTION_DIGITS => 0]
+                        ) ?></span>
                     <span>Опыт работы 3 года</span>
                 </div>
                 <div class="profile-info company-profile-info resume-view__info-blick">

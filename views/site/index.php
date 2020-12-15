@@ -63,7 +63,8 @@
                             <div class="company-list-search__block-left">
                                 <div class="resume-list__block-img mb8">
                                     <a href="<?= \yii\helpers\Url::to(['resume/view', 'id' => $item->id]) ?>">
-                                        <img src="<?= $item->img_path ? 'uploads/' . $item->img_path : 'images/nophoto.png' ?>" alt="profile">
+                                        <img src="<?= $item->img_path ? 'uploads/' . $item->img_path : 'images/nophoto.png' ?>"
+                                             alt="profile">
                                     </a>
                                 </div>
                             </div>
@@ -77,7 +78,11 @@
                                 <h3 class="mini-title mobile-off"><?= /** @var array $positionTitles */
                                     array_search($item->position - 1, $positionTitles) ?></h3>
                                 <div class="d-flex align-items-center flex-wrap mb8 ">
-                                    <span class="mr16 paragraph"><?= $item->salary ?></span>
+                                    <span class="mr16 paragraph"><?= Yii::$app->formatter->asCurrency(
+                                            $item->salary,
+                                            'RUB',
+                                            [NumberFormatter::FRACTION_DIGITS => 0]
+                                        ) ?></span>
                                     <span class="mr16 paragraph"><?= ($item->experience) ? $item->experience : "Нет опыта" ?></span>
                                     <span class="mr16 paragraph"><?= $years = floor(
                                             (time() - strtotime($item->birthday)) / (60 * 60 * 24 * 365.25)
