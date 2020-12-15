@@ -7,9 +7,11 @@ namespace app\controllers;
 use app\components\Employments;
 use app\components\Schedule;
 use app\models\Resume;
+use app\models\UploadImage;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 
 class ResumeController extends Controller
 {
@@ -52,6 +54,7 @@ class ResumeController extends Controller
     public function actionAddResume()
     {
         $resume = new Resume();
+        $image = new UploadImage();
 
         $resume->user_id = rand(1, 10);
 
@@ -59,6 +62,11 @@ class ResumeController extends Controller
         $employmentCheck = Employments::getEmploymentCheckboxItems();
 
         if ($resume->load(Yii::$app->request->post())) {
+
+            $file = UploadedFile::getInstance($image, 'image');
+
+            $resume->saveImage($image->uploadImage($file));
+
             if (is_array($resume->employment)) {
                 $resume->employment = serialize($resume->employment);
             }
@@ -76,7 +84,8 @@ class ResumeController extends Controller
 
         return $this->render(
             'add-resume',
-            compact('resume', 'scheduleCheck', 'employmentCheck')
+            compact('resume', 'image', 'scheduleCheck', 'employmentCheck')
         );
     }
+
 }

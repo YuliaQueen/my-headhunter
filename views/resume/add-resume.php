@@ -33,11 +33,10 @@ $params = ['prompt' => 'Выберите профессию...', 'class' => 'nse
                         <div class="paragraph">Фото</div>
                     </div>
                     <div class="col-lg-3 col-md-4 col-11">
-                        <div class="profile-foto-upload mb8"><img src="images/profile-foto.jpg" alt="foto">
+                        <div class="profile-foto-upload mb8"><img src="images/nophoto.png" alt="foto">
                         </div>
                         <label class="custom-file-upload">
-                            <input type="file"/>
-                            Изменить фото
+                            <?= $form->field($image, 'image')->fileInput()->label('Изменить фото'); ?>
                         </label>
                     </div>
                 </div>

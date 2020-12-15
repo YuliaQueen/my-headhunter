@@ -2,7 +2,9 @@
 
 namespace app\models;
 
+use Yii;
 use yii\base\Model;
+use yii\web\UploadedFile;
 
 class UploadImage extends Model
 {
@@ -16,13 +18,13 @@ class UploadImage extends Model
         ];
     }
 
-    public function upload()
+    public function uploadImage(UploadedFile $file)
     {
-        if ($this->validate()) {
-            var_dump($this->image);
-        } else {
-            return false;
-        }
-    }
+        $this->image = $file;
+        $fileName = strtolower(md5(uniqid($file->baseName)) . '.' . $file->extension);
 
+        $file->saveAs(Yii::getAlias('@web') . 'uploads/' . $fileName);
+
+        return $fileName;
+    }
 }

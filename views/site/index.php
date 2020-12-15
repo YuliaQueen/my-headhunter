@@ -63,7 +63,7 @@
                             <div class="company-list-search__block-left">
                                 <div class="resume-list__block-img mb8">
                                     <a href="<?= \yii\helpers\Url::to(['resume/view', 'id' => $item->id]) ?>">
-                                        <img src="images/profile-foto.jpg" alt="profile">
+                                        <img src="<?= $item->img_path ? 'uploads/' . $item->img_path : 'images/nophoto.png' ?>" alt="profile">
                                     </a>
                                 </div>
                             </div>

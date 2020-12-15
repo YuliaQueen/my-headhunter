@@ -135,4 +135,11 @@ class Resume extends \yii\db\ActiveRecord
         return true;
     }
 
+    public function saveImage($fileName)
+    {
+        $this->img_path = $fileName;
+
+        return $this->save(false);
+    }
+
 }

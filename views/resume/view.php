@@ -19,8 +19,10 @@
         </div>
         <div class="row">
             <div class="col-lg-4 col-md-5 mobile-mb32">
-                <div class="profile-foto resume-profile-foto"><img src="images/profile-foto.jpg" alt="profile-foto">
+                <div class="profile-foto resume-profile-foto"><img src="uploads/<?= $resume->img_path; ?>" alt="profile-foto">
                 </div>
+                <a class="custom-file-upload"
+                   href="<?=\yii\helpers\Url::to(['resume/set-image', 'id' => $resume->id]) ?>">Изменить фото</a>
             </div>
             <div class="col-lg-8 col-md-7">
                 <div class="main-title d-md-flex justify-content-between align-items-center mobile-mb16">
