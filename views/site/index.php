@@ -26,12 +26,31 @@
                                 <a class="dropdown-item" href="#">За все время</a>
                             </div>
                         </div>
-                        <div class="vakancy-page-wrap show">
+                        <div class="vakancy-page-wrap show d-flex">
                             <?=
                             $sort->link(
                                 'created_at',
                                 [
-                                    'class' => 'vakancy-page-btn vakancy-btn dropdown-toggle',
+                                    'class' => 'vakancy-btn dropdown-toggle mr20',
+                                    'id' => 'dropdownMenuLink',
+                                    'data-toggle' => 'dropdown'
+                                ]
+                            ) ?>
+                            <?=
+                            $sort->link(
+                                'salary',
+                                [
+                                    'class' => 'vakancy-btn dropdown-toggle mr20',
+                                    'id' => 'dropdownMenuLink',
+                                    'data-toggle' => 'dropdown'
+                                ]
+                            ) ?>
+
+                            <?=
+                            $sort->link(
+                                'birthday',
+                                [
+                                    'class' => 'vakancy-btn dropdown-toggle',
                                     'id' => 'dropdownMenuLink',
                                     'data-toggle' => 'dropdown'
                                 ]
