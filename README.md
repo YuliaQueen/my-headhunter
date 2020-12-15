@@ -1,4 +1,7 @@
 ## Тестовое задание PHP разработчика
+
+![Иллюстрация к проекту](https://github.com/YuliaQueen/my-headhunter/raw/master/web/images/screenshot.png)
+
 ### Вёрстка: https://yadi.sk/d/aze2Qwc4W-ctxw 
 Функциональные требования
 #### Меню
