@@ -10,7 +10,6 @@ use yii\db\Expression;
  * This is the model class for table "resume".
  *
  * @property int $id
- * @property int $user_id
  * @property string $first_name
  * @property string $middle_name
  * @property string $last_name
@@ -67,7 +66,6 @@ class Resume extends \yii\db\ActiveRecord
         return [
             [
                 [
-                    'user_id',
                     'first_name',
                     'middle_name',
                     'last_name',
@@ -81,7 +79,7 @@ class Resume extends \yii\db\ActiveRecord
                 'required'
             ],
             [['birthday', 'created_at', 'updated_at'], 'safe'],
-            [['user_id', 'position', 'experience', 'view_count'], 'integer'],
+            [['position', 'experience', 'view_count'], 'integer'],
             [['jobs', 'note'], 'string'],
             [['first_name', 'middle_name', 'last_name'], 'string', 'max' => 100],
             [['gender'], 'string', 'max' => 4],

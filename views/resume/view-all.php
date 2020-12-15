@@ -47,7 +47,7 @@
                                             </div>
                                             <div class="col-xl-12 my-vacancies-block__left-col mb16">
                                                 <h2 class="mini-title mb8"><?= /** @var array $positionTitles */
-                                                    array_search($item->position - 1, $positionTitles) ?></h2>
+                                                    array_search($item->position, $positionTitles) ?></h2>
                                                 <div class="d-flex align-items-center flex-wrap mb8 ">
                                                     <span class="mr16 paragraph"><?= Yii::$app->formatter->asCurrency(
                                                             $item->salary,

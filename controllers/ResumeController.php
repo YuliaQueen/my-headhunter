@@ -53,7 +53,7 @@ class ResumeController extends Controller
 
     public function actionViewAll()
     {
-        $resume = Resume::find()->where(['user_id' => 10])->all();//todo заменить на id авторизованного юзера
+        $resume = Resume::find()->all();//todo заменить на id авторизованного юзера
 
         $resumeCount = count($resume);
 
@@ -67,8 +67,6 @@ class ResumeController extends Controller
     {
         $resume = new Resume();
         $image = new UploadImage();
-
-        $resume->user_id = rand(1, 10);
 
         $scheduleCheck = Schedule::getScheduleCheckboxItems();
         $employmentCheck = Employments::getEmploymentCheckboxItems();

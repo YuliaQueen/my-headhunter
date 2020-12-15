@@ -95,7 +95,7 @@
                                         )
                                     ) ?></div>
                                 <h3 class="mini-title mobile-off"><?= /** @var array $positionTitles */
-                                    array_search($item->position - 1, $positionTitles) ?></h3>
+                                    array_search($item->position, $positionTitles) ?></h3>
                                 <div class="d-flex align-items-center flex-wrap mb8 ">
                                     <span class="mr16 paragraph"><?= Yii::$app->formatter->asCurrency(
                                             $item->salary,

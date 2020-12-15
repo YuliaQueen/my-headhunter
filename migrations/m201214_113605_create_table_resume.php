@@ -21,7 +21,6 @@ class m201214_113605_create_table_resume extends Migration
             '{{%resume}}',
             [
                 'id' => $this->primaryKey(),
-                'user_id' => $this->integer(10)->unsigned(),
                 'first_name' => $this->string(100)->notNull(),
                 'middle_name' => $this->string(100)->notNull(),
                 'last_name' => $this->string(100)->notNull(),
