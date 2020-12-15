@@ -109,6 +109,18 @@ class SiteController extends Controller
                         'desc' => ['created_at' => SORT_DESC],
                         'default' => SORT_DESC,
                         'label' => 'По новизне'
+                    ],
+                    'salary' => [
+                        'asc' => ['salary' => SORT_ASC],
+                        'desc' => ['salary' => SORT_DESC],
+                        'default' => SORT_DESC,
+                        'label' => 'По зарплате'
+                    ],
+                    'birthday' => [
+                        'asc' => ['birthday' => SORT_ASC],
+                        'desc' => ['birthday' => SORT_DESC],
+                        'default' => SORT_DESC,
+                        'label' => 'По возрасту'
                     ]
                 ]
             ]
