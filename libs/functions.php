@@ -1,6 +1,5 @@
 <?php
 
-use app\models\Employment;
 use app\models\Position;
 use yii\helpers\ArrayHelper;
 

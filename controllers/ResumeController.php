@@ -7,6 +7,7 @@ namespace app\controllers;
 use app\components\Employments;
 use app\components\Schedule;
 use app\models\Employment;
+use app\models\Position;
 use app\models\Resume;
 use app\models\UploadImage;
 use Yii;
@@ -34,7 +35,7 @@ class ResumeController extends Controller
         $positionTitle = $resume->getPosition()->select('position_title')->one();
 
         $resume->view_count += 1;
-        $resume->save();
+        $resume->update();
 
         if ($employmentList) {
             $employmentList = implode(', ', $employmentList);

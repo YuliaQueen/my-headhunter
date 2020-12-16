@@ -353,7 +353,6 @@ $params = ['prompt' => 'Выберите профессию...', 'class' => 'nse
                     </div>
                     <div class="col-lg-10 col-md-9">
                         <?= \yii\helpers\Html::submitButton('Сохранить', ['class' => 'orange-btn link-orange-btn']); ?>
-                        <!--                    <a href="#" class="orange-btn link-orange-btn">Сохранить</a>-->
                     </div>
                 </div>
                 <?php $form = ActiveForm::end() ?>
