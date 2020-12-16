@@ -54,7 +54,7 @@ class ResumeController extends Controller
 
     public function actionViewAll()
     {
-        $resume = Resume::find()->all();//todo заменить на id авторизованного юзера
+        $resume = Resume::find()->all();
 
         $resumeCount = count($resume);
 
